@@ -36,29 +36,10 @@ class windows_webserver {
 
 
 
-windowsfeature {
-  'NET-Framework-45-ASPNET',
-  'Web-Server',
-  'Web-Default-Doc',
-  'Web-Dir-Browsing',
-  'Web-Http-Errors',
-  'Web-Static-Content',
-  'Web-Http-Logging',
-  'Web-Custom-Logging',
-  'Web-Log-Libraries',
-  'Web-Filtering',
-  'Web-Basic-Auth',
-  'Web-Url-Auth',
-  'Web-Windows-Auth',
-  'Web-Net-Ext45',
-  'Web-ASP',
-  'Web-ASP-Net45',
-  'Web-ISAPI-Ext',
-  'Web-ISAPI-Filter',
-  'Web-Mgmt-Console',
-  'Web-Mgmt-Service']
-   timeout => 1800,
-   ensure => present,
+windowsfeature {['NET-Framework-45-ASPNET','Web-Server','Web-Default-Doc','Web-Dir-Browsing','Web-Http-Errors','Web-Static-Content','Web-Http-Logging','Web-Custom-Logging','Web-Log-Libraries','Web-Filtering',
+  'Web-Basic-Auth','Web-Url-Auth','Web-Net-Ext45','Web-ASP','Web-ASP-Net45','Web-ISAPI-Ext','Web-ISAPI-Filter','Web-Mgmt-Console','Web-Mgmt-Service']
+    timeout => 1800,
+    ensure => present,
  } ->
 
  exec { 'check_drive':
