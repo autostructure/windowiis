@@ -34,7 +34,11 @@
 #
 class windows_webserver {
 
+<<<<<<< HEAD
  windowsfeature { 'IIS',
+=======
+windowsfeature { 'IIS',
+>>>>>>> 8c8d4a4334eec3c7705f26f27f9b2fb78044834c
   'NET-Framework-45-ASPNET',
   'Web-Server',
   'Web-Default-Doc',
@@ -54,6 +58,7 @@ class windows_webserver {
   'Web-ISAPI-Ext',
   'Web-ISAPI-Filter',
   'Web-Mgmt-Console',
+<<<<<<< HEAD
   'Web-Mgmt-Service'],
    timeout => 1800,
    # ensure => absent,
@@ -64,5 +69,17 @@ class windows_webserver {
   onlyif    => ('if ([ADSI]::Exists("WinNT://localhost/IIS Administrator")) { exit 1 } else { exit 0 }'),
   provider  => powershell,
  }
+=======
+  'Web-Mgmt-Service',
+   timeout => 1800,
+   ensure => present,
+} ->
+
+exec { 'check_drive':
+  command  => file('windows_webserver/CheckDrive.ps1'),
+  onlyif   => ('if ([ADSI]::Exists("WinNT://localhost/IIS Administrator")) { exit 1 } else { exit 0 }'),
+  provider => powershell,
+}
+>>>>>>> 8c8d4a4334eec3c7705f26f27f9b2fb78044834c
 
 }
