@@ -37,7 +37,6 @@ class windows_webserver {
 
 
 windowsfeature {
-  'IIS',
   'NET-Framework-45-ASPNET',
   'Web-Server',
   'Web-Default-Doc',
