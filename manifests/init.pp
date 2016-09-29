@@ -32,22 +32,37 @@
 #
 # Copyright 2016 Jay Weaver, US Forest Service.
 #
-  class windows_webserver {
+class windows_webserver {
 
+windowsfeature { 'IIS',
+  'NET-Framework-45-ASPNET',
+  'Web-Server',
+  'Web-Default-Doc',
+  'Web-Dir-Browsing',
+  'Web-Http-Errors',
+  'Web-Static-Content',
+  'Web-Http-Logging',
+  'Web-Custom-Logging',
+  'Web-Log-Libraries',
+  'Web-Filtering',
+  'Web-Basic-Auth',
+  'Web-Url-Auth',
+  'Web-Windows-Auth',
+  'Web-Net-Ext45',
+  'Web-ASP',
+  'Web-ASP-Net45',
+  'Web-ISAPI-Ext',
+  'Web-ISAPI-Filter',
+  'Web-Mgmt-Console',
+  'Web-Mgmt-Service',
+   timeout => 1800,
+   ensure => present,
+} ->
 
-    windowsfeature { 'NET-Framework-Core':
-          ensure => present,
-        } ->
-
-  #windowsfeature{$iisfeature:
-  #  ensure  => present,
-  #  timeout => 1800,
-  #  } ->
-
-  exec { 'check_drive':
+exec { 'check_drive':
   command  => file('windows_webserver/CheckDrive.ps1'),
   onlyif   => ('if ([ADSI]::Exists("WinNT://localhost/IIS Administrator")) { exit 1 } else { exit 0 }'),
   provider => powershell,
-  }
+}
 
-  }
+}
