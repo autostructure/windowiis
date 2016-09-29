@@ -36,7 +36,8 @@ class windows_webserver {
 
 
 
-windowsfeature { 'IIS',
+windowsfeature {
+  'IIS',
   'NET-Framework-45-ASPNET',
   'Web-Server',
   'Web-Default-Doc',
@@ -56,7 +57,7 @@ windowsfeature { 'IIS',
   'Web-ISAPI-Ext',
   'Web-ISAPI-Filter',
   'Web-Mgmt-Console',
-  'Web-Mgmt-Service'],
+  'Web-Mgmt-Service']
    timeout => 1800,
    ensure => present,
  } ->
