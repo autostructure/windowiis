@@ -31,11 +31,10 @@
 # ---------
 #
 # Copyright 2016 Jay Weaver, US Forest Service.
-# 
-class windows_webserver {
+#
+  class windows_webserver {
 
- windowsfeature { 'IIS':
-  feature_name => [
+  $iisfeature = [
   'NET-Framework-45-ASPNET',
   'Web-Server',
   'Web-Default-Doc',
@@ -56,15 +55,16 @@ class windows_webserver {
   'Web-ISAPI-Filter',
   'Web-Mgmt-Console',
   'Web-Mgmt-Service'
-  ],
-   timeout => 1800,
-   # ensure => absent,
- } ->
+  ]
+  windowsfeature{$iisfeature:
+    ensure  => present,
+    timeout => 1800,
+    } ->
 
- exec { 'check_drive':
-  command   => file('windows_webserver/CheckDrive.ps1'),
-  onlyif    => ('if ([ADSI]::Exists("WinNT://localhost/IIS Administrator")) { exit 1 } else { exit 0 }'),
-  provider  => powershell,
- }
+  exec { 'check_drive':
+  command  => file('windows_webserver/CheckDrive.ps1'),
+  onlyif   => ('if ([ADSI]::Exists("WinNT://localhost/IIS Administrator")) { exit 1 } else { exit 0 }'),
+  provider => powershell,
+  }
 
-}
+  }
