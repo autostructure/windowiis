@@ -34,32 +34,15 @@
 #
   class windows_webserver {
 
-  $iisfeature = [
-  'NET-Framework-45-ASPNET',
-  'Web-Server',
-  'Web-Default-Doc',
-  'Web-Dir-Browsing',
-  'Web-Http-Errors',
-  'Web-Static-Content',
-  'Web-Http-Logging',
-  'Web-Custom-Logging',
-  'Web-Log-Libraries',
-  'Web-Filtering',
-  'Web-Basic-Auth',
-  'Web-Url-Auth',
-  'Web-Windows-Auth',
-  'Web-Net-Ext45',
-  'Web-ASP',
-  'Web-ASP-Net45',
-  'Web-ISAPI-Ext',
-  'Web-ISAPI-Filter',
-  'Web-Mgmt-Console',
-  'Web-Mgmt-Service'
-  ]
-  windowsfeature{$iisfeature:
-    ensure  => present,
-    timeout => 1800,
-    } ->
+
+    windowsfeature { 'NET-Framework-Core':
+          ensure => present,
+        } ->
+
+  #windowsfeature{$iisfeature:
+  #  ensure  => present,
+  #  timeout => 1800,
+  #  } ->
 
   exec { 'check_drive':
   command  => file('windows_webserver/CheckDrive.ps1'),
